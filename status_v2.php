@@ -97,7 +97,11 @@ for($x=0;$x<$api_key_number;$x++) {
 	echo "<tr>
 	<td>",str_replace(array("ok","fail"), array("可用","不可用"), $decoded->stat),"</td>
 	<td>",$decoded->monitors[0]->friendly_name,"</td>
-	<td>",$decoded->monitors[0]->url,"</td>
+	<td>",$decoded->monitors[0]->url;
+	if ($decoded->monitors[0]->port != NULL) {
+		echo ":",$decoded->monitors[0]->port;
+	}
+	echo "</td>
 	<td>",round($uptime[0],2),"%</td>
 	<td>",round($uptime[1],2),"%</td>
 	<td>",round($uptime[2],2),"%</td>
