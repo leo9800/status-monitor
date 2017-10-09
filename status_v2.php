@@ -95,7 +95,7 @@ for($x=0;$x<$api_key_number;$x++) {
 	//echo $decoded->stat,"<br />",$decoded->monitors[0]->friendly_name,"<br />",$decoded->monitors[0]->url,"<br />";
 
 	echo "<tr>
-	<td>",str_replace(array("ok","fail"), array("可用","不可用"), $decoded->stat),"</td>
+	<td>",str_replace(array("ok","fail"), array("✔","✘"), $decoded->stat),"</td>
 	<td>",$decoded->monitors[0]->friendly_name,"</td>
 	<td>",$decoded->monitors[0]->url;
 	if ($decoded->monitors[0]->port != NULL) {
