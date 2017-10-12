@@ -9,9 +9,7 @@
 	//Count the amount of API Keys
 	$api_key_amount = count($api_key);
 
-	//Set timezone
-	date_default_timezone_set(Asia/Shanghai);
-
+	date_default_timezone_set('UTC');
 	//Unix time stamp for now, today, yesterday, day before yesterday(0:00)
 	$now = time();
 	$today = strtotime(date('Y-m-d', time())." 00:00:00");
@@ -96,10 +94,9 @@ for($x=0;$x<$api_key_amount;$x++) {
 
 	//Decode fetched JSON
 	$decoded = json_decode($response);
-	//convert 3-days data into array
-	$uptime = explode("-", $decoded->monitors[0]->custom_uptime_ranges);
-	//convert weekly and monthly data into array
-	$uptime_total = explode("-", $decoded->monitors[0]->custom_uptime_ratio);
+	//Convert uptime data into arrays
+	$uptime_ranges = explode("-", $decoded->monitors[0]->custom_uptime_ranges);
+	$uptime_ratios = explode("-", $decoded->monitors[0]->custom_uptime_ratio);
 
 	//Create table row
 	echo "<tr>
@@ -111,11 +108,11 @@ for($x=0;$x<$api_key_amount;$x++) {
 		echo ":",$decoded->monitors[0]->port;
 	}
 	echo "</td>
-	<td>",round($uptime[0],2),"%</td>
-	<td>",round($uptime[1],2),"%</td>
-	<td>",round($uptime[2],2),"%</td>
-	<td>",round($uptime_total[0],2),"%</td>
-	<td>",round($uptime_total[1],2),"%</td>
+	<td>",round($uptime_ranges[0],2),"%</td>
+	<td>",round($uptime_ranges[1],2),"%</td>
+	<td>",round($uptime_ranges[2],2),"%</td>
+	<td>",round($uptime_ratios[0],2),"%</td>
+	<td>",round($uptime_ratios[1],2),"%</td>
 	</tr>";
 }
 ?>
